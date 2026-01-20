@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My discover | fxsS</title>
+  <link rel="icon" type="image/png" href="https://files.catbox.moe/2gsl6r.png">
+  <meta property="og:title" content="Fxs | fxs x search">
+  <meta property="og:description" content="fxs a moroccan search Engine">
+  <style>
+    body {
+      background-color: grey;
+    }
+    a {
+      color: orangered;
+    }
+  </style>
+</head>
+<body>
+
+<a href="https://fxs1400.github.io/Fxs/fxsacc.html">my account</a>
+
+<center style="background-color: rgb(0, 0, 0); color: aqua;">
+  <form action="https://fxs1400.github.io/fxsS" method="get">
+    <img src="https://files.catbox.moe/xb1v0h.png"><br>
+    <a href="host.html">hosting free</a>&nbsp;<a href="game.html">game</a>
+
+  <script async src="https://cse.google.com/cse.js?cx=a071c2c33d5244975">
+</script>
+<div class="gcse-search"></div>
+
+    <a href="email.html">send email</a>&nbsp;<a href="info.html">info</a>
+  </form>
+</center>
+
+<center>
+  <a href="https://fxs1400.github.io/nadwa">nadwa (only arabic)</a>&nbsp;
+  <a href="https://fxs1400.github.io/Fxs">Fxs social</a>&nbsp;
+  <a href="https://www.hespress.com/">hespress</a>
+</center>
+
+<script>
+ 
+
+  const url = "https://fxs1400.github.io/fxsS/My Project1-20-2026_17-31-41.html";
+
+  async function fetchData() {
+    try {
+      const response = await fetch(url);
+      const data = await response.text();
+      xu = data;
+      console.log("API returned text:", data);
+    } catch (error) {
+      console.error("Error fetching API:", error);
+    }
+  }
+
+  function handleOffline() {
+    document.body.innerHTML = xu;
+  }
+
+  function handleOnline() {
+    location.reload();
+   
+  }
+
+  window.addEventListener("load", async () => {
+    await fetchData();
+    if (!navigator.onLine) handleOffline();
+    window.addEventListener("offline", handleOffline);
+    window.addEventListener("online", handleOnline);
+  });
+</script>
+
+<div style="display: flex;">
+  <div style="background-color: blueviolet; color: cadetblue; width: 50%;">
+    <h1>Random anime girl image</h1>
+    <img id="animeImage" src="https://reigen.moe/image/loading.gif" width="100%" height="400" alt="Click the button to load an image">
+    <br>
+    <button onclick="getAnimeGirl()">Get Random Image</button>
+    <b>Note: maybe NSFW content</b>
+    <script>
+      async function getAnimeGirl() {
+        try {
+          const response = await fetch("https://nekos.best/api/v2/neko");
+          if (!response.ok) throw new Error("Network response was not ok");
+          const data = await response.json();
+          const imageUrl = data.results[0].url;
+          document.getElementById("animeImage").src = imageUrl;
+        } catch (error) {
+          console.error("Error fetching image:", error);
+          alert("Failed to load image. Please try again.");
+        }
+      }
+
+    </script>
+    
+  <script>
+  // Read query string
+  const params = new URLSearchParams(window.location.search);
+  const vale = params.get("search");
+
+  window.addEventListener("load", () => {
+    // If ?search=:car: then embed your local file
+    if (vale === ":car:") {
+      document.body.innerHTML = `
+        <embed src="https://fxs1400.github.io/fxsS/My%20Project1-20-2026_17-31-41.html" 
+               width="100%" height="800px" type="text/html">
+      `;
+    }
+  
+   if (vale === null) {
+      
+    }
+     if (vale !== ":car:") {
+      document.body.innerHTML = `
+       <a href="https://fxs1400.github.io/Fxs/fxsacc.html">my account</a>
+
+<center style="background-color: rgb(0, 0, 0); color: aqua;">
+  <form action="https://fxs1400.github.io/fxsS" method="get">
+    <img src="https://files.catbox.moe/xb1v0h.png"><br>
+    <a href="host.html">hosting free</a>&nbsp;<a href="game.html">game</a>
+
+  
+    <a href="email.html">send email</a>&nbsp;<a href="info.html">info</a>
+  </form>
+</center>
+<embed src="https://cse.google.com/cse?cx=a071c2c33d5244975S" width="100%" heigth="50%"></embed>
+
+      `;
+    }
+  
+  });
+</script>
+
+  </div>
+
+  <div style="width: 50%; background-color: floralwhite; color: black;">
+    <center>
+      <img src="https://fxs1400.github.io/vidland/Momo.png" width="200" height="100"><br>
+      <p>Share the videos in vid-building</p><br>
+      <div style="background-image: url(2026_01_20_0xz_Kleki.png); width:200px; height:200px;">
+        <svg width="100%" height="100%"></svg>
+      </div>
+    </center>
+  </div>
+</div>
+
+<hr>
+<small>fxs all copyright 2026</small>
+
+</body>
+</html>
