@@ -1,6 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>My discover | fxsS</title>
   <link rel="icon" type="image/png" href="https://files.catbox.moe/2gsl6r.png">
   <meta property="og:title" content="Fxs | fxs x search">
@@ -8,30 +10,181 @@
   <style>
     body {
       background-color: grey;
+      margin: 0;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      color: #000;
     }
-    a {
-      color: orangered;
+    a { color: orangered; }
+    .top-center {
+      background-color: rgb(0, 0, 0);
+      color: aqua;
+      padding: 1rem;
+      text-align: center;
     }
+    .layout {
+      display: flex;
+      flex-wrap: wrap;
+    }
+    .left, .right {
+      box-sizing: border-box;
+      padding: 1rem;
+    }
+    .left { width: 100%; background: blueviolet; color: cadetblue; }
+    .right { width: 100%; background: floralwhite; color: black; }
+    @media(min-width:900px) {
+      .left, .right { width: 50%; }
+    }
+    .anime-image { width: 100%; max-height: 400px; object-fit: cover; background: #111; display:block; }
+    .note { display:block; margin-top:.5rem; color: #ffb3b3; }
+    footer { padding: .5rem 1rem; border-top: 1px solid #ccc; text-align: center; background:#fafafa; }
+    .inline-links a { margin-right: .5rem; }
+    #embedContainer { margin-top: 1rem; width: 100%; }
   </style>
 </head>
 <body>
 
-<a href="https://fxs1400.github.io/Fxs/fxsacc.html">my account</a>
+  <div style="padding:.5rem">
+    <a href="https://fxs1400.github.io/Fxs/fxsacc.html">my account</a>
+  </div>
 
-<center style="background-color: rgb(0, 0, 0); color: aqua;">
-  <form action="https://fxs1400.github.io/fxsS" method="get">
-    <img src="https://files.catbox.moe/xb1v0h.png"><br>
-    <a href="host.html">hosting free</a>&nbsp;<a href="game.html">game</a>
+  <div class="top-center">
+    <form id="searchForm" action="https://fxs1400.github.io/fxsS" method="get" style="margin:0;">
+      <img src="https://files.catbox.moe/xb1v0h.png" alt="Fxs logo" style="max-width:320px"><br>
+      <div style="margin-top:.5rem;">
+        <a href="host.html">hosting free</a>&nbsp;<a href="game.html">game</a>
+      </div>
 
-  <script async src="https://cse.google.com/cse.js?cx=a071c2c33d5244975">
+      <!-- Google Custom Search Engine (CSE) - keep the script and container -->
+      <script async src="https://cse.google.com/cse.js?cx=a071c2c33d5244975"></script>
+      <div class="gcse-search" style="margin-top:.75rem;"></div>
+
+      <div style="margin-top:.5rem;">
+        <a href="email.html">send email</a>&nbsp;<a href="info.html">info</a>
+      </div>
+    </form>
+  </div>
+
+  <div style="text-align:center; padding:.75rem;" class="inline-links">
+    <a href="https://fxs1400.github.io/nadwa">nadwa (only arabic)</a>&nbsp;
+    <a href="https://fxs1400.github.io/Fxs">Fxs social</a>&nbsp;
+    <a href="https://www.hespress.com/">hespress</a>
+  </div>
+
+  <div id="embedContainer" style="padding:.5rem;"></div>
+
+  <div class="layout" style="padding:0 .5rem 1rem .5rem;">
+    <div class="left">
+      <h1>Random anime girl image</h1>
+      <img id="animeImage" class="anime-image" src="https://reigen.moe/image/loading.gif" alt="Click the button to load an image">
+      <div style="margin-top:.5rem;">
+        <button id="getAnimeBtn" type="button">Get Random Image</button>
+        <span class="note"><strong>Note:</strong> maybe NSFW content</span>
+      </div>
+    </div>
+
+    <div class="right">
+      <center>
+        <img src="https://fxs1400.github.io/vidland/Momo.png" width="200" height="100" alt="Momo"><br>
+        <p>Share the videos in vid-building</p><br>
+        <div style="background-image: url(2026_01_20_0xz_Kleki.png); width:200px; height:200px; background-size:cover;">
+          <svg width="100%" height="100%"></svg>
+        </div>
+      </center>
+    </div>
+  </div>
+
+  <footer>
+    <small>fxs all copyright 2026</small>
+  </footer>
+
+<script>
+/*
+  Improvements included:
+  - avoid replacing document.body.innerHTML (that removed scripts & listeners)
+  - declare variables with let/const
+  - consolidated boot logic into DOMContentLoaded
+  - safer offline handling (falls back to previously fetched content if available)
+  - non-destructive embed insertion when ?search=:car:
+*/
+
+const CACHED_PAGE_URL = "https://fxs1400.github.io/fxsS/My Project1-20-2026_17-31-41.html";
+let cachedHtml = ""; // will store fetched HTML (if fetched successfully)
+
+// Fetch and cache the remote HTML (best-effort)
+async function fetchData() {
+  try {
+    const response = await fetch(CACHED_PAGE_URL, { cache: "no-store" });
+    if (!response.ok) throw new Error("Network response was not ok: " + response.status);
+    cachedHtml = await response.text();
+    console.log("Cached page fetched successfully.");
+  } catch (err) {
+    console.warn("Could not fetch cached page:", err);
+    cachedHtml = "";
+  }
+}
+
+// Offline handler: inject cachedHtml into a contained element (not whole body)
+function handleOffline() {
+  if (cachedHtml) {
+    const container = document.getElementById("embedContainer");
+    // Insert the cached page inside an embed so page scripts won't execute immediately
+    container.innerHTML = `<embed src="${encodeURI(CACHED_PAGE_URL)}" width="100%" height="800px" type="text/html">`;
+  } else {
+    const container = document.getElementById("embedContainer");
+    container.innerHTML = "<p style='color:#ffecec;'>You are offline and no cached content is available.</p>";
+  }
+}
+
+// Online handler: optionally reload to refresh dynamic content
+function handleOnline() {
+  // If you prefer not to reload the whole page automatically, remove the line below.
+  // location.reload();
+  console.log("Network is back online.");
+}
+
+async function init() {
+  await fetchData();
+
+  // If offline at load time, show cached content
+  if (!navigator.onLine) handleOffline();
+
+  // wire up online/offline events
+  window.addEventListener("offline", handleOffline);
+  window.addEventListener("online", handleOnline);
+
+  // Anime image button behavior
+  const btn = document.getElementById("getAnimeBtn");
+  btn.addEventListener("click", async () => {
+    try {
+      const res = await fetch("https://nekos.best/api/v2/neko");
+      if (!res.ok) throw new Error("Network response was not ok");
+      const data = await res.json();
+      const imageUrl = data?.results?.[0]?.url;
+      if (!imageUrl) throw new Error("No image URL in response");
+      document.getElementById("animeImage").src = imageUrl;
+    } catch (err) {
+      console.error("Error fetching image:", err);
+      alert("Failed to load image. Please try again.");
+    }
+  });
+
+  // Handle ?search=:car: without replacing the whole document
+  const params = new URLSearchParams(window.location.search);
+  const vale = params.get("search");
+  if (vale === ":car:") {
+    const container = document.getElementById("embedContainer");
+    // use encoded URL for spaces
+    const embedUrl = encodeURI(CACHED_PAGE_URL);
+    container.innerHTML = `<embed src="${embedUrl}" width="100%" height="800px" type="text/html">`;
+  }
+}
+
+// Initialize when DOM is ready
+window.addEventListener("DOMContentLoaded", init);
 </script>
-<div class="gcse-search"></div>
 
-    <a href="email.html">send email</a>&nbsp;<a href="info.html">info</a>
-  </form>
-</center>
-
-<center>
+</body>
+</html><center>
   <a href="https://fxs1400.github.io/nadwa">nadwa (only arabic)</a>&nbsp;
   <a href="https://fxs1400.github.io/Fxs">Fxs social</a>&nbsp;
   <a href="https://www.hespress.com/">hespress</a>
